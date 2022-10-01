@@ -1,0 +1,11 @@
+{
+  "name": "wahtsapp_bot",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@open-wa/wa-automate": "^4.46.3",
+    "node-schedule": "^2.1.0"
+  }
+}
