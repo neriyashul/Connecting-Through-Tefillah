@@ -3,7 +3,6 @@ const messages = require('./messages');
 
 function register(phone) {
     db.add(phone);
-    return messages.startConversationMessage;
 }
 
 function activate(phone) {
@@ -28,8 +27,9 @@ module.exports = {
     execute: function (message) {
         const phone = message.from.split('@')[0];
         if (!db.exists(phone)) {
-            return register(phone);
-        } else if (!db.isActive(phone)) {
+            register(phone);
+        } 
+        if (!db.isActive(phone)) {
             if (message.text.startsWith('1')) {
                 return activate(phone);
             } else {
