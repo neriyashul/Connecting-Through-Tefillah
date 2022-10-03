@@ -35,6 +35,9 @@ module.exports = {
             } else {
                 return messages.startConversationMessage;
             }
+        } else if (message.text.startsWith('3')) {
+            db.clear(phone);
+            return messages.dataDeletedSuccessfully;
         } else if (!db.hasFirstName(phone)) {
             return addFirstName(phone, message.text);
         } else if (!db.hasMomFirstName(phone)) {
@@ -43,9 +46,6 @@ module.exports = {
         } else if (message.text.startsWith('2')) {
             db.clear(phone);
             return activate(phone);
-        } else if (message.text.startsWith('3')) {
-            db.clear(phone);
-            return messages.dataDeletedSuccessfully;
         } else {
             return getDataReceivedMessage(phone);
         }
