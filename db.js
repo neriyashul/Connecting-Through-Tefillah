@@ -1,5 +1,4 @@
 const fs = require("fs");
-const schedule = require('node-schedule');
 
 var dict = {};
 
@@ -10,52 +9,65 @@ try {
     dict = {};
 }
 
-
-schedule.scheduleJob('*/3 * * * *', () => {
-    console.log(`Saving db to file. Number of names: ${Object.keys(dict).length}`);
+function update_file() {
     const jsonString = JSON.stringify(dict);
     fs.writeFile('./names.json', jsonString, err => {
         if (err) {
             console.log('Error writing dict to file', err)
         } else {
-            console.log('Successfully wrote dict to file')
+            console.log(`Successfully wrote dict to file. Number of names: ${Object.keys(dict).filter((key) => dict[key]['active'] == 1).length}`)
         }
-    })
-});
+    });
+}
+
+function init(phone) {
+	dict[phone] = {};
+	update_file();
+}
+
+function update(phone, field, value) {
+    dict[phone][field] = value;
+	update_file();
+}
+
+function resetPhone(phone) {
+    dict[phone] = {};
+	update_file();
+}
+
 
 module.exports = {
     exists: function  (phone) {
         return phone in dict;
     },
-    add: function (phone) {
-        dict[phone] = {};
-    },
     isActive: function (phone) {
         return dict[phone]['active'] == 1;
-    },
-    activate: function (phone) {
-        return dict[phone]['active'] = 1;
     },
     hasFirstName: function (phone) {
         return dict[phone]['name'] != undefined;
     },
-    updateName: function(phone, name) {
-        dict[phone]['name'] = name;
-    },
     hasMomFirstName: function (phone) {
         return dict[phone]['momName'] != undefined;
     },
-    updateMomName: function(phone, name) {
-        dict[phone]['momName'] = name;
-    },
-    clear: function(phone) {
-        delete dict[phone];
-        this.add(phone);
-    },
     getName: function (phone) {
-      return dict[phone]['name'];
+        return dict[phone]['name'];
     },
     getMomName: function(phone) {
         return dict[phone]['momName'];
+    },
+    add: function (phone) {
+        init(phone);
+    },
+    activate: function (phone) {
+		update(phone, 'active', 1);
+    },
+    updateName: function(phone, name) {
+        update(phone, 'name', name);
+    },
+    updateMomName: function(phone, name) {
+        update(phone, 'momName', name);
+    },
+    clear: function(phone) {
+        resetPhone(phone);
     }
   };
