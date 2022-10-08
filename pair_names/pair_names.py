@@ -13,25 +13,34 @@ def get_from_file():
 def remove_not_active(dphones):
     return {k: v for k, v in dphones.items() if v.get('active', 0) == 1}
 
+def get_missing_details(dphones):
+    return {k: v for k, v in dphones.items() if v.get('name', 0) != 0 \
+        and v.get('momName', 0) == 0}
+
+def remove_missing_details(dphones):
+    return {k: v for k, v in dphones.items() if v.get('momName', 0) != 0}
 
 def add_name_for_prayer(prayer, userForPray):
     prayer['nameForPray'] = userForPray['name'] + ' בת ' + userForPray['momName']
 
+def is_same_names(user1, user2):
+    return user1['name'] == user2['name'] and user1['momName'] == user2['momName']
+
 def shuffle(phones, users):
-    orig_phones = list(phones)
-    isPossible = False
-    for phone1 in orig_phones:
-            for phone2 in phones:
-                if users[phone1]['name'] != users[phone2]['name'] or users[phone1]['momName'] != users[phone2]['momName']:
-                    isPossible = True
-    
-    if isPossible:
-        while True:
-            random.shuffle(phones)
-            for phone1, phone2 in zip(orig_phones, phones):
-                if users[phone1]['name'] == users[phone2]['name'] and users[phone1]['momName'] == users[phone2]['momName']:
-                    continue
+    while True:
+        random.shuffle(phones)
+        
+        for i in range(len(phones) - 1):
+            user = users[phones[i]]
+            userForPray = users[phones[i+1]]
+            if is_same_names(user, userForPray):
+                continue
+        
+        user = users[phones[len(phones) - 1]]
+        userForPray = users[phones[0]]
+        if not is_same_names(user, userForPray):
             break
+    
 
 def add_names_for_prayer(users):
     phones = list(users.keys())
@@ -61,5 +70,7 @@ def write_to_file(data):
 if __name__ == '__main__':
     phones = get_from_file()
     active_phones = remove_not_active(phones)
-    add_names_for_prayer(active_phones)
-    write_to_file(active_phones)
+    final_phones = remove_missing_details(active_phones)
+    print('phones with missing details:\n', get_missing_details(active_phones))
+    add_names_for_prayer(final_phones)
+    write_to_file(final_phones)
