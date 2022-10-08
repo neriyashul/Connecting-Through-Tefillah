@@ -3,6 +3,7 @@ _IGNORE_YomKippur'sTfila
 node_modules
 names.json
 YomKippur'sTfila.data.json
-pair_names/
+pair_names/final_names.xlsx
+pair_names/venv/
 names final.json
 names.json
