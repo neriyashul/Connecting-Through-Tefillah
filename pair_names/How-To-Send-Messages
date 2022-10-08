@@ -1,0 +1,25 @@
+1. Install "Sender One - WA Message ClickSend" extension, a few days before Yom Kippur.
+2. Run the python script.
+   The script creates an Excel file with column 'WhatsApp number' and  column 'nameForPray'.
+3. Upload the file in the extension in the "Send Messages Pro" section.
+4. Add the message:
+
+"""
+שמחה ומתרגשת שנרשמת למיזם *"מתחברות בתפילה"!* 
+
+בימים האחרונים נרשמו מאות נשים מהארץ ומהעולם שלקחו על עצמן להתפלל היום תפילת מנחה אחת בעבור השנייה.
+
+תפילת המנחה היום, היא תפילה מיוחדת שנאמרת ביום החופה ונהוגה כסגולה למציאת בן זוג.
+
+בהגרלה שעשינו נבחרת להתפלל עבור:
+*{{nameForPray}}*
+
+ובמקביל מישהי אחרת מתפללת עבורך.
+
+תפילת מנחה אפשר להתפלל *היום* עד הדלקת נרות. יש נוסח מיוחד לתפילת מנחה של ערב יום כיפור שאפשר למצוא במחזור.
+
+בעז"ה שתפילותנו יתקבלו לטובה, שנכתב ונחתם לשנה טובה ומתוקה,
+ונזכה לבשורות טובות!
+"""
+
+5. Send
