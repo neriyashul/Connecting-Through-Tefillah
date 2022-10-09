@@ -1,9 +1,9 @@
-package-lock.json
-_IGNORE_YomKippur'sTfila
-node_modules
-names.json
-YomKippur'sTfila.data.json
-pair_names/final_names.xlsx
-pair_names/venv/
-names final.json
-names.json
+src/package-lock.json
+src/_IGNORE_YomKippur'sTfila
+src/node_modules
+src/names.json
+src/YomKippur'sTfila.data.json
+src/pair_names/final_names.xlsx
+src/pair_names/venv/
+src/names final.json
+src/names.json
