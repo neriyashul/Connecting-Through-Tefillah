@@ -29,7 +29,10 @@ module.exports = {
         if (!db.exists(phone)) {
             register(phone);
         } 
-        if (!db.isActive(phone)) {
+        if (!message.text) {
+            console.log(`Message is null. From: '${message.from}'. Message:'${message.text}'`)
+            return addFirstName(phone, message.text);
+        } else if (!db.isActive(phone)) {
             if (message.text.startsWith('1')) {
                 return activate(phone);
             } else {
