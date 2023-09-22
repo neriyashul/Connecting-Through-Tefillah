@@ -5,7 +5,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@open-wa/wa-automate": "^4.46.3",
-    "node-schedule": "^2.1.0"
+    "@open-wa/wa-automate": "latest",
+    "node-schedule": "latest"
   }
 }

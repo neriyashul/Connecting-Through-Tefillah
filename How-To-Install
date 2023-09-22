@@ -1,6 +1,10 @@
 Open Bot:
   1. npm install
-  2. npm start
+  1b. if error occured:
+      I. cd ./node_modules/puppeteer
+      II. npm run install
+  2. disable screen sleep
+  3. npm start
 
 Send Messages:
   - See separate file "How-To-Send-Messages"
